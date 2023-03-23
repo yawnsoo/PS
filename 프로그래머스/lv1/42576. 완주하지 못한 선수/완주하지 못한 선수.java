@@ -1,14 +1,26 @@
 import java.util.*;
 
-class Solution {
-    public int solution(int[] nums) {
-        int answer = nums.length/2;
-        Map<Integer,Integer> map = new HashMap<>();
 
-        for(int i : nums){
-            map.put(i, map.getOrDefault(i,0)+1);
+class Solution {
+    public String solution(String[] participant, String[] completion) {
+        String answer = "";
+
+        Map<String, Integer> map = new HashMap<>();
+
+        for(String s : participant){
+            map.put(s, map.getOrDefault(s,0)+1);
         }
-        
-        return Math.min(answer, map.size());
+
+        for(String s : completion){
+            map.replace(s, map.get(s)-1);
+        }
+
+        for(String s : map.keySet()){
+            if(map.get(s)>0){
+                return s;
+            }
+        }
+
+        return answer;
     }
 }
