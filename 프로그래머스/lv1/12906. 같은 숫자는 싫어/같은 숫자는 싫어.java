@@ -23,6 +23,7 @@ public class Solution {
             }
         }
         
+        // 3. stack에는 항상 값 존재, answer에 추가
         answer.add(stack.pop());
         
         return answer.stream().mapToInt(Integer::intValue).toArray();
