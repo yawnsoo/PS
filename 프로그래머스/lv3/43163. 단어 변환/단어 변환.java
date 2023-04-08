@@ -2,9 +2,7 @@ import java.util.*;
 
 class Solution {
     int answer = 0;
-    //1. bfs
-    //3. 한문자만 다르면 q에 등록, cnt+1, 다른 문자 visited:true
-    //4. 같으면 cnt 출력
+    
     public class Word3cnt{
         private String word;
         private int cnt;
@@ -46,8 +44,11 @@ class Solution {
                         }
                     }
                     
+                    //3. 한문자만 다르면 q에 등록, cnt+1, 다른 문자 visited:true
                     if(diff==1){
                         visited[i] = true;
+                        
+                        //4. 같으면 cnt+1 출력
                         if(words[i].equals(target)){
                             answer = temp.getCnt()+1;
                             return;
@@ -65,7 +66,7 @@ class Solution {
         boolean isContain = false;
         boolean[] visited = new boolean[words.length];
         
-        //target이 words[]안에 포함되어 있는지 확인
+        //1. target이 words[]안에 포함되어 있는지 확인
         for(String s : words){
             if(s.equals(target)){
                 isContain = true;
@@ -73,7 +74,7 @@ class Solution {
         }
         if(!isContain) return 0;
         
-        
+        //2. bfs
         bfs(begin,target,words,visited);
         
         
