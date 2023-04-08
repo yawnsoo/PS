@@ -9,8 +9,6 @@ class Solution {
     
     public void dfs(int[][] computers, int node, int start){
         
-        if(start==nodes) return;
-        
         for(int i = start; i < nodes; i++){
             if(!visited[i]&&computers[node][i]==1){
                 visited[i] = true;
