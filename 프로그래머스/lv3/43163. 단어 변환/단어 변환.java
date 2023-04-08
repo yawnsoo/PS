@@ -2,66 +2,80 @@ import java.util.*;
 
 class Solution {
     int answer = 0;
-    boolean[] visited;
-    
-    public void bfs(String begin, String target, String[] words){
+    //1. bfs
+    //3. 한문자만 다르면 q에 등록, cnt+1, 다른 문자 visited:true
+    //4. 같으면 cnt 출력
+    public class Word3cnt{
+        private String word;
+        private int cnt;
         
-        Queue<String[]> q = new LinkedList<>();
-        
-        q.add(new String[]{begin,String.valueOf(answer)});
-        
-        while(!q.isEmpty()){
-            String[] toCheck = q.poll();
-            String check = toCheck[0];
-            int depth = Integer.valueOf(toCheck[1]);
-            
-            if(check.equals(target)){
-                answer = depth;
-                return;
-            }
-            
-            for(int i = 0; i<words.length;i++){
-                if(!visited[i]){
-                    
-                    int cnt = 0;
-                    for(int j = 0; j<words[i].length();j++){
-                        if(words[i].charAt(j) != check.charAt(j)){
-                            cnt++;
-                        }
-                    }
-                    
-                    if(cnt<2){
-                        visited[i] = true;
-                        q.add(new String[] {words[i], String.valueOf(depth+1)});
-                    }
-                    
-                    
-                }
-            }
-            
+        public String getWord(){
+            return this.word;  
+        } 
+        public int getCnt(){
+            return this.cnt;
         }
         
+        public Word3cnt(String word, int cnt){
+            this.word = word;
+            this.cnt = cnt;
+        }
         
     }
     
-    public int solution(String begin, String target, String[] words) {
+    public void bfs(String begin, String target, String[] words, boolean[] visited){
         
-        // >> 가능 여부 확인
-        boolean flag = false;
+        Queue<Word3cnt> q = new LinkedList<>();
+        int wordl = words[0].length();
+        q.offer(new Word3cnt(begin, 0));
         
-        for(String s : words){
-            if(s.equals(target)){
-                flag = true;
+        while(!q.isEmpty()){
+            Word3cnt temp = q.poll();
+            
+            for(int i = 0; i<words.length; i++){
+                if(!visited[i]){
+                    int diff = 0;
+                    String word = words[i];
+                    
+                    for(int j = 0; j<wordl; j++){
+                        if(temp.getWord().charAt(j)!=word.charAt(j)){
+                            diff++;
+                        }
+                        if(diff>1){
+                            break;
+                        }
+                    }
+                    
+                    if(diff==1){
+                        visited[i] = true;
+                        if(words[i].equals(target)){
+                            answer = temp.getCnt()+1;
+                            return;
+                        }
+                        
+                        q.offer(new Word3cnt(words[i], temp.getCnt()+1));
+                    }   
+                }
             }
         }
+    }
+    
+    
+    public int solution(String begin, String target, String[] words) {
+        boolean isContain = false;
+        boolean[] visited = new boolean[words.length];
         
-        if(!flag){
-            return 0;
+        //target이 words[]안에 포함되어 있는지 확인
+        for(String s : words){
+            if(s.equals(target)){
+                isContain = true;
+            }
         }
-        // 가능 여부 확인 <<
+        if(!isContain) return 0;
         
-        visited = new boolean[words.length];
-        bfs(begin,target,words);
+        
+        bfs(begin,target,words,visited);
+        
         
         return answer;
     }
