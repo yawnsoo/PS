@@ -1,90 +1,38 @@
 import java.util.*;
 
 class Solution {
-    String[] answer;
-    boolean[] used;
+    //1. dfs
+    //2. 모든 표를 사용한 경우 List<String>에 추가
+    //3. List 정렬하고 0번째꺼 가져와서 .split(" ")
+    List<String> answer = new ArrayList<>();
     
-    public class Ticket implements Comparable<Ticket>{
-        String from;
-        String to;
-        int idx;
-        
-        public Ticket(String from, String to, int idx){
-            this.from = from;
-            this.to = to;
-            this.idx = idx;
+    public void dfs(String[][] tickets, boolean[] visited, int pick, String start, String route){
+        if(pick==tickets.length){
+            answer.add(route);
+            return;
         }
-        
-        public String getFrom(){
-            return from;
-        }
-        
-        public String getTo(){
-            return to;
-        }
-        
-        public int getIdx(){
-            return idx;
-        }
-        
-        
-        @Override
-        public int compareTo(Ticket t){
-            return this.to.compareTo(t.to);
-            // if(this.to.compareTo(t.to)>0){
-            //     return 1;
-            // } else if(this.to.compareTo(t.to)<0){
-            //     return -1;
-            // } else return 0;
-        }
-        
-    }
-    
-    public void dfs(String start, String[][] tickets, int depth){
-        
-        List<Ticket> canGo = new ArrayList<>();
         
         for(int i = 0; i<tickets.length; i++){
-            if(tickets[i][0].equals(start)&&!used[i]){
-                canGo.add(new Ticket(tickets[i][0], tickets[i][1], i));
+            if(!visited[i]&&tickets[i][0].equals(start)){
+                visited[i]=true;
+                if(pick+1==tickets.length){
+                    dfs(tickets, visited, pick+1, tickets[i][1], route+start+" "+tickets[i][1]);
+                } else{
+                    dfs(tickets, visited, pick+1, tickets[i][1], route+start+" ");
+                }
+                visited[i]=false;
             }
         }
-        
-        Collections.sort(canGo);
-        
-        for(int i = 0; i<canGo.size();i++){
-            Ticket temp = canGo.get(i);
-        
-            // used[temp.getIdx()] = true;
-            used[temp.idx] = true;
-            // answer[depth] = temp.getFrom();
-            answer[depth] = temp.from;
-        
-            if(depth==tickets.length-1){
-                // answer[depth+1] = temp.getTo();
-                answer[depth+1] = temp.to;
-                return;
-            }
-        
-            // dfs(temp.getTo(), tickets, depth+1);
-            dfs(temp.to, tickets, depth+1);
-            
-            if(answer[answer.length-1]==null){
-                // used[temp.getIdx()] = false;
-                used[temp.idx] = false;
-            } else return;
-        }
-        
-        
     }
     
     public String[] solution(String[][] tickets) {
-        answer = new String[tickets.length+1];
-        used = new boolean[tickets.length];
         
-        dfs("ICN", tickets, 0);
+        boolean[] visited = new boolean[tickets.length];
         
+        dfs(tickets,visited,0,"ICN","");
         
-        return answer;
+        Collections.sort(answer);
+        
+        return answer.get(0).split(" ");
     }
 }
