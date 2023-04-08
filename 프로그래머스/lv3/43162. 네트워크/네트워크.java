@@ -4,7 +4,6 @@ class Solution {
     //2. node 방문 안했으면 dfs진입, answer++
     //3. dfs로 node와 이어진 부분 모두 true
     
-    int answer = 0;
     boolean[] visited;
     int nodes;
     
@@ -21,7 +20,7 @@ class Solution {
     }
     
     public int solution(int n, int[][] computers) {
-        
+        int answer = 0;
         nodes = n;
         visited = new boolean[n];
         
