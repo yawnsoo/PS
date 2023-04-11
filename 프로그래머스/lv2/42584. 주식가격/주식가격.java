@@ -16,7 +16,6 @@ class Solution {
                     s.push(i);
                     while(prices[s.peek()]>prices[i+1]){
                         int idx = s.pop();
-                        int pri = prices[idx];
                         answer[idx] = i+1 - idx;
 
                         if(s.isEmpty()) break;
