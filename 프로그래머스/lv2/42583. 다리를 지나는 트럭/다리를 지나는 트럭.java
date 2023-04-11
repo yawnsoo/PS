@@ -45,7 +45,7 @@ class Solution {
         //3. cnt == 트럭의 개수 이면 종료
         //  - 빼고
         //  - 더하고
-        while(!bridge.isEmpty()){
+        while(cnt<truck_weights.length){
             answer++;
 
             //1. 시각q.pop()+다리 길이 의 시간에 도달 할 경우
