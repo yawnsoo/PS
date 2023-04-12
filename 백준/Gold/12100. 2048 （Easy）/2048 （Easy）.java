@@ -4,6 +4,7 @@ public class Main {
 
     int max = 0;
     static int n = 0;
+    int[][] input = new int[n][n];
 
     public int maxNum(int[][] map){
         int maxMap = 0;
@@ -32,6 +33,8 @@ public class Main {
     }
 
     public int[][] mapMoved(int[][] map, String param){
+
+        input = copyMap(map);
 
         switch (param){
             case "L" :
@@ -173,12 +176,29 @@ public class Main {
                 break;
         }
 
+
+
         return map;
     }
 
+    //변경사항 확인
+    public boolean isSame(int[][] map){
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if(map[i][j]!=input[i][j]){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     public void dfs(int[][] map, int phase){
-        //종료 : 5번
-        if(phase==5){
+
+        //종료 : 5번 or 전이랑 변경 없으면
+        if(phase==5||isSame(map)){
             //  - 최댓값 비교 후 저장
             int maxNum = maxNum(map);
             if(max<maxNum){
