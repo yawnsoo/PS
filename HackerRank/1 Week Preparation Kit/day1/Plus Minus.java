@@ -1,3 +1,6 @@
+//https://www.hackerrank.com/challenges/one-week-preparation-kit-plus-minus/problem
+
+
 import java.io.*;
 import java.math.*;
 import java.security.*;
