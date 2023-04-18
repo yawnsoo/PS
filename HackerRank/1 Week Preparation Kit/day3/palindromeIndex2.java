@@ -10,7 +10,6 @@ import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-//투 포인터로 풀음
 class Result {
 
     /*
@@ -22,39 +21,36 @@ class Result {
 
     public static int palindromeIndex(String s) {
     // Write your code here
-    int start = 0;
-    int end = s.length()-1;
-    
-    while(start<end){
-        if(s.charAt(start)!=s.charAt(end)){
-            break;
-        }
-        
-        start++;
-        end--;
+        char [] ss = s.toCharArray();
+        int l = 0, r = ss.length - 1;
+        if (isPal(ss, l, r)) return -1;
+        while (l < r) {
+            if (ss[l] != ss[r]) {
+                if (isPal(ss, l+1, r)) return l;
+                if (isPal(ss, l, r-1)) return r;
+            } 
+            l++; 
+            r--;
+         }
+
+         return -1; 
     }
     
-    if(start>=end) return -1;
-    
-    int l = start;
-    int r = end;
-    start++;
-    
-    while(start<end){
-        if(s.charAt(start)!=s.charAt(end)){
-            return r;
+
+    static boolean isPal(char [] s, int l, int r) {
+        while (l < r) {
+            if (s[l] != s[r]) return false;
+            l++;
+            r--;
         }
-        
-        start++;
-        end--;
+        return true;
     }
     
-    if(start>=end) return l;
     
-    return -1;
+
     }
 
-}
+
 
 public class Solution {
     public static void main(String[] args) throws IOException {
