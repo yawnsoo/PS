@@ -43,7 +43,7 @@ BOJ에서 백준님이 구성하신 문제집 ["삼성 SW 역량 테스트 기�
 | DAY 2           |  1H | 코테 시험 봄, 코드트리 - 포탑 부수기 |
 | DAY 3           |  3H | 코드트리 - 포탑 부수기 |
 | DAY 4           |  2H |HackerRank day 1|
-| DAY 5           |  3H |HackerRank day 2|
+| DAY 5           |  3H |HackerRank day 2,3|
 | DAY 6           |     ||
 | DAY 7           |     ||
 | DAY 8           |     ||
