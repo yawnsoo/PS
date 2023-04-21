@@ -7,17 +7,11 @@ public class Main {
 
 
     private void dfs(int n, List<int[]> schedule, int day, int total, int last){
-
-        if(day>=n-1) {
-            if (day == n - 1) {
-                if (schedule.get(day)[0] == 1) {
-                    answer = Math.max(answer, total + schedule.get(day)[1]);
-                } else {
-                    answer = Math.max(answer, total);
-                }
-            } else if(day==n){
+        //종료 조건 : 종료 날짜
+        if(day>n-1) { //  - 마지막 날
+            if(day==n){
                 answer = Math.max(answer,total);
-            }else{
+            }else{ //  - 마지막날 초과 : 초과한 날짜 빼기
                 answer = Math.max(answer,total-last);
             }
 
