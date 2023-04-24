@@ -60,7 +60,7 @@ public class Main {
                 }
                 break;
 
-            default : System.out.println("solution : Invalid command");
+            default : System.out.println("moveDice : Invalid command");
         }
     }
     private void rollDice(int command) {
