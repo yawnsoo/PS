@@ -50,13 +50,11 @@ public class Main {
         Queue<int[]> q = new LinkedList<>(spreaders);
         int[] dy = new int[]{0,1,0,-1};
         int[] dx = new int[]{1,0,-1,0};
-        int[][] mapSimul = new int[n][m];
+        int[][] mapSimul = new int[n][];
         int infected = 0;
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                mapSimul[i][j] = map[i][j];
-            }
+                mapSimul[i] = map[i].clone();
         }
 
         while (!q.isEmpty()) {
