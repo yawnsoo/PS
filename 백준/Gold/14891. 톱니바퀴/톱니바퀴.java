@@ -47,11 +47,9 @@ public class Main {
 
             String s = cogwheels[cmd[0]];
             if (cmd[1] == 1) { // 회전 : 시계 방향
-                s = s.charAt(7) + s.substring(0, 7);
-                cogwheels[cmd[0]] = s;
+                cogwheels[cmd[0]] = s.charAt(7) + s.substring(0, 7);
             } else { // 회전 : 반 시계
-                s = s.substring(1, 8) + s.charAt(0);
-                cogwheels[cmd[0]] = s;
+                cogwheels[cmd[0]] = s.substring(1, 8) + s.charAt(0);
             }
             turned[cmd[0]] = true;
         }
