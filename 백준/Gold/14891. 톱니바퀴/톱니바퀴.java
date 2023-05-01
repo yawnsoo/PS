@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     static int k;
-    static String[] cogwheels = new String[4];
+    static StringBuffer[] cogwheels = new StringBuffer[4];
 
 
     public static int solution(Queue<int[]> commands) {
@@ -45,11 +45,13 @@ public class Main {
                 }
             }
 
-            String s = cogwheels[cmd[0]];
+            StringBuffer s = cogwheels[cmd[0]];
             if (cmd[1] == 1) { // 회전 : 시계 방향
-                cogwheels[cmd[0]] = s.charAt(7) + s.substring(0, 7);
+                s.insert(0,s.charAt(7));
+                s.deleteCharAt(8);
             } else { // 회전 : 반 시계
-                cogwheels[cmd[0]] = s.substring(1, 8) + s.charAt(0);
+                s.append(s.charAt(0));
+                s.deleteCharAt(0);
             }
             turned[cmd[0]] = true;
         }
@@ -62,7 +64,8 @@ public class Main {
 
         for (int i = 0; i < 4; i++) {
             //오른쪽 idx=2, 왼쪽 idx=6
-            cogwheels[i] = sc.nextLine();
+            StringBuffer sb = new StringBuffer(sc.nextLine());
+            cogwheels[i] = sb;
         }
 
 
