@@ -20,8 +20,6 @@ public class Main {
         }
     }
 
-    //TODO
-    // 연속 경사로의 경우 추가 고려해야함
     private static boolean isPath(int[] ints) {
         Deque<Integer> front = new ArrayDeque<>();
         Deque<Integer> back = new ArrayDeque<>();
@@ -30,11 +28,6 @@ public class Main {
         front.add(ints[0]);
 
         for (int i = 1; i < n; i++) {
-
-//            if(front.isEmpty()){
-//                front.add(ints[i]);
-//                continue;
-//            }
 
             int diff = front.getLast() - ints[i];
 
@@ -46,8 +39,9 @@ public class Main {
 
                 if(front.size() < l) return false; // l보다 작으면 false
                 else{
-                //      l보다 같거나 크면 : front 초기화
+                    //      l보다 같거나 크면 : front 초기화
                     front.clear();
+                    //  경사로 채우기
                     for (int j = 0; j < l; j++) {
                         if(!filled[i-j-1]){
                             filled[i-j-1] = true;
@@ -68,7 +62,7 @@ public class Main {
                 //  back의 길이가 l보다 작으면 false
                 if(cnt<l||back.isEmpty()) return false;
                 else{
-                    //  front, back 초기화
+                    //  경사로 채우기
                     for (int j = 0; j <l; j++) {
                         if(!filled[i+j]){
                             filled[i+j] = true;
@@ -77,6 +71,7 @@ public class Main {
 
                     i = t-1;
 
+                    //  front, back 초기화
                     front.clear();
                     back.clear();
                     front.addLast(ints[i]);
